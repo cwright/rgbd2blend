@@ -35,7 +35,7 @@ void testApp::update() {
         int width = 640;
         
         //this section is modified from the ofxRGBDepth renderer so as to not require opencv camera intrinsics. 
-        ofFile file("/tmp/"+ofToString(filecounter,3)+".obj", ofFile::WriteOnly);
+        ofFile file("/tmp/rgbd_"+ofToString(filecounter,3)+".obj", ofFile::WriteOnly);
         float fx = tanf(ofDegToRad(fov.x) / 2) * 2;
         float fy = tanf(ofDegToRad(fov.y) / 2) * 2;
         
@@ -93,8 +93,9 @@ void testApp::draw() {
     for(it = doneFiles.begin(); it != doneFiles.end(); it++){
         statusText += *it;
     }
-    ofDrawBitmapString("drag-n-drop rgbdtoolkit-pngs here to convert\n\nobj files appear in /tmp/\n\n" + statusText , 20, 20);
+    ofDrawBitmapString("drag-n-drop rgbdtoolkit-pngs here to convert\n\nobj files appear in /tmp/rgbd_[filenumber].obj\n\n" + statusText , 20, 20);
 }
+
 
 void testApp::mouseReleased(int x, int y, int button){
 }
