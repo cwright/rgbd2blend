@@ -50,9 +50,16 @@ void testApp::update() {
         int width = 640;
         
         //this section is modified from the ofxRGBDepth renderer so as to not require opencv camera intrinsics. 
+        ofFile mtlFile("/tmp/rgbdsharedmaterial.mtl", ofFile::WriteOnly);
+        mtlFile << "newmtl rgbdshared" <<endl; //define shared material. simplifies workflow in blender. 
+        mtlFile << "illum 1" <<endl; //no specular.
+        mtlFile.close();
+        
         ofFile file("/tmp/rgbd_"+ofToString(filecounter,3)+".obj", ofFile::WriteOnly);
         float fx = tanf(ofDegToRad(fov.x) / 2) * 2;
         float fy = tanf(ofDegToRad(fov.y) / 2) * 2;
+        file << "mtllib rgbdsharedmaterial.mtl" << endl;
+        file << "usemtl rgbdshared" << endl; 
         
         file << "#vertices" << endl;
         
