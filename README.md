@@ -18,8 +18,8 @@ frame pattern : (empty)
 
 start/end: as many as you converted, 0 indexed.
 
+for texturing your mesh, there is a supplied "rgbdshared" material that all of the individual meshfoot frames will be linked to. Adding a movie texture to this and using UV project from view is the prefered method for generating texture coordinates. 
 
-texturing isnt yet supported in the converter, but the point is to just do it in blender.
 video tutorial coming soon..
    
 
