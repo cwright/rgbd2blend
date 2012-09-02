@@ -101,9 +101,23 @@ void testApp::mouseReleased(int x, int y, int button){
 }
 
 void testApp::dragEvent(ofDragInfo dragInfo){
-    fileq = dragInfo.files;
-    filecounter = dragInfo.files.size(); 
-    filecount = dragInfo.files.size(); 
+//    fileq = dragInfo.files;
+//    filecounter = dragInfo.files.size(); 
+//    filecount = dragInfo.files.size(); 
+//    doneFiles.push_back("files to process: " + ofToString(filecount, 3) + "\n");
+//old version--^, doesnt work over 100 files. so we grab the directory instead --v. 
+    ofDirectory dir(dragInfo.files[0]);
+    dir.allowExt("png");
+    dir.listDir();
+    dir.sort();
+    
+    for (int i = 0; i< dir.size(); i++){
+        fileq.push_back(dir.getPath(i));
+    }
+    
+//    fileq = dragInfo.files;
+    filecounter = dir.size(); 
+    filecount = dir.size(); 
     doneFiles.push_back("files to process: " + ofToString(filecount, 3) + "\n");
 }
 
