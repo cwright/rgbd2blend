@@ -5,6 +5,7 @@
 #pragma once
 
 #include "ofMain.h"
+#include "ofxUI.h"
 #include "ofxDepthImageCompressor.h"
 #include <cmath>
 
@@ -15,16 +16,25 @@ public:
 	void draw();
     void mouseReleased(int x, int y, int button);
     void dragEvent(ofDragInfo dragInfo);
+    void keyPressed(int key);
     
     ofxDepthImageCompressor kinect;
     ofShortPixels spix;
     int depthThreshhold;
+    float fdepth;
     ofPoint fov;
     int simpl;
+    float fsimpl;
     string statusText;
     vector<string> fileq;
     list<string> doneFiles;
     int filecounter;
     int filecount;
+    
+    //UI stuff
+    ofxUICanvas *gui; 
+    	void guiEvent(ofxUIEventArgs &e);
+    	void gotMessage(ofMessage msg);
+    
 };
  

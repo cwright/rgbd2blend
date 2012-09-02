@@ -4,21 +4,36 @@
 
 void testApp::setup() {
 
+    ofEnableSmoothing(); 
+
     
     //kinect field of view
     fov = ofPoint(58.,45.);    
     //change this to effect seam cutting for the mesh
-    depthThreshhold = 128;    
+    depthThreshhold = 128;  
+    fdepth = depthThreshhold;
     //set simplification level for mesh saving. 
-    simpl= 5;    
+    simpl= 5;  
+    fsimpl = simpl;
    
     filecounter = 0;
     filecount = 0;    
+    
+    gui = new ofxUICanvas(ofGetWidth()/2.,0, ofGetWidth()/2., ofGetHeight());
+    gui->addWidgetDown(new ofxUILabel("export control", OFX_UI_FONT_MEDIUM)); 
+    gui->addSlider("hop size", 0, 10, &fsimpl, ofGetWidth()/2., 20);
+    gui->addSlider("depththreshold", 0, 512, &fdepth, ofGetWidth()/2., 20);
+    ofAddListener(gui->newGUIEvent,this,&testApp::guiEvent);	    
+
     
 }
 
 void testApp::update() {
     
+    simpl = (int)(abs(fsimpl));
+    fsimpl = simpl;
+    depthThreshhold = (int)(abs(fdepth));
+    fdepth = depthThreshhold;
     if (!fileq.empty()){                
         filecounter--;
         
@@ -120,5 +135,16 @@ void testApp::dragEvent(ofDragInfo dragInfo){
     filecount = dir.size(); 
     doneFiles.push_back("files to process: " + ofToString(filecount, 3) + "\n");
 }
+void testApp::guiEvent(ofxUIEventArgs &e){
+    
+}
+void testApp::keyPressed(int key){
+    std::cout <<"simplification:" << fsimpl <<endl;
+    std::cout <<"depth:" << fdepth <<endl;
+    
+}
 
 
+void testApp::gotMessage(ofMessage msg){
+    
+}
